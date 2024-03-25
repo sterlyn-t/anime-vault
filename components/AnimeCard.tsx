@@ -26,7 +26,7 @@ const variants = {
 function AnimeCard({ anime, index }: Prop) {
   return (
     <MotionDiv
-      className="max-w-sm rounded relative w-full hover:scale-110 transform transition duration-400"
+      className="max-w-sm rounded relative w-full hover:scale-110 transform transition duration-450"
       variants={variants}
       initial="hidden"
       animate="visible"

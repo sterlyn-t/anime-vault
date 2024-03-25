@@ -26,7 +26,7 @@ const variants = {
 function AnimeCard({ anime, index }: Prop) {
   return (
     <MotionDiv
-      className="max-w-sm rounded relative w-full hover:scale-110 transform transition duration-450"
+      className="max-w-sm rounded relative w-full"
       variants={variants}
       initial="hidden"
       animate="visible"
@@ -42,7 +42,7 @@ function AnimeCard({ anime, index }: Prop) {
           src={`https://shikimori.one${anime.image.original}`}
           alt={anime.name}
           fill
-          className="rounded-xl"
+          className="rounded-xl hover:scale-105 transform transition duration-450 cursor-pointer"
         />
       </div>
       <div className="py-4 flex flex-col gap-3">

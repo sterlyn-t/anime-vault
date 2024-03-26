@@ -37,15 +37,22 @@ const Page = ({ params }: PageProps) => {
         </div>
         <div className="flex flex-col gap-2">
           <h1 className="text-white font-bold text-2xl mt-4">{data?.name}</h1>
-          <div className="flex flex-row gap-2 items-center">
-            <Image
-              src="/star.svg"
-              alt="star"
-              width={18}
-              height={18}
-              className="object-contain"
-            />
-            <p className="text-base font-bold text-[#FFAD49]">{data?.score}</p>
+          <div className="flex flex-row gap-4 items-center">
+            <div className="flex flex-row gap-2 items-center">
+              <Image
+                src="/star.svg"
+                alt="star"
+                width={18}
+                height={18}
+                className="object-contain"
+              />
+              <p className="text-base font-bold text-[#FFAD49]">
+                {data?.score}
+              </p>
+            </div>
+            <div className="bg-slate-400 py-0.5 px-1.5 rounded-lg">
+              <p className="text-white text-sm">{data?.rating.toUpperCase()}</p>
+            </div>
           </div>
           <div className="flex flex-row gap-2">
             {data?.genres.map((item: any) => (

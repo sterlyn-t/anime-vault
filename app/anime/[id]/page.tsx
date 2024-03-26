@@ -92,7 +92,7 @@ const Page = ({ params }: PageProps) => {
                       className="rounded-md"
                     />
                   </div>
-                  <p className=" text-white text-xs">Episode {value}</p>
+                  <p className=" text-white text-xs mt-2">Episode {value}</p>
                 </div>
               ))}
           </div>

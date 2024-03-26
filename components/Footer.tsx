@@ -1,4 +1,6 @@
+import { Github } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 function Footer() {
   return (
@@ -12,27 +14,12 @@ function Footer() {
         className="object-contain"
       />
       <div className="flex items-center gap-6">
-        <Image
-          src="/tiktok.svg"
-          alt="logo"
-          width={19}
-          height={19}
-          className="object-contain"
-        />
-        <Image
-          src="/instagram.svg"
-          alt="logo"
-          width={19}
-          height={19}
-          className="object-contain"
-        />
-        <Image
-          src="/twitter.svg"
-          alt="logo"
-          width={19}
-          height={19}
-          className="object-contain"
-        />
+        <p className=" text-white text-sm hover:underline cursor-pointer">
+          FAQ
+        </p>
+        <Link href={"https://github.com/sterlyn-t/anime-vault"} target="_blank">
+          <Github width={19} height={19} color="white" />
+        </Link>
       </div>
     </footer>
   );

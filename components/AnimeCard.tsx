@@ -16,6 +16,7 @@ export interface AnimeProp {
 interface Prop {
   anime: AnimeProp;
   index: number;
+  onClick?: () => void;
 }
 
 const variants = {
@@ -23,7 +24,7 @@ const variants = {
   visible: { opacity: 1 },
 };
 
-function AnimeCard({ anime, index }: Prop) {
+function AnimeCard({ anime, index, onClick }: Prop) {
   return (
     <MotionDiv
       className="max-w-sm rounded relative w-full"
@@ -42,6 +43,7 @@ function AnimeCard({ anime, index }: Prop) {
           src={`https://shikimori.one${anime.image.original}`}
           alt={anime.name}
           fill
+          onClick={onClick}
           className="rounded-xl hover:scale-105 transform transition duration-450 cursor-pointer"
         />
       </div>

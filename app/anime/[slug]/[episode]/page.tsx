@@ -14,7 +14,7 @@ interface EpisodePageProps {
 const Page = ({ params, searchParams }: EpisodePageProps) => {
   return (
     <div className="px-8 flex flex-col gap-4 bg-[#0F1117]  mb-8">
-      <VideoPlayerSSR animeTitle={params.slug} />
+      <VideoPlayerSSR animeTitle={params.slug} episodeId={params.episode} />
       <div>
         <p className="text-white text-bold text-xl">
           Episode {params.episode} - {params.slug}

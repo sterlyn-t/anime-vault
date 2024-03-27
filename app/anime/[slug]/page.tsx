@@ -1,5 +1,5 @@
 "use client";
-import { fetchAnimeDetails } from "@/app/action";
+import { fetchAnimeDetails, getMediaIdByTitle } from "@/app/action";
 import { AnimeProp } from "@/components/AnimeCard";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
@@ -11,15 +11,23 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 interface PageProps {
   params: {
-    id: string;
+    slug: string;
   };
+}
+
+function formatTitle(input: string): string {
+  if (!input) return "";
+  return input
+    .replace(/[^a-zA-Z0-9\s]/g, "")
+    .toLowerCase()
+    .replace(/\s+/g, "-");
 }
 
 const Page = ({ params }: PageProps) => {
   const [data, setData] = useState<any>();
 
   useEffect(() => {
-    fetchAnimeDetails(params.id).then((res) => {
+    fetchAnimeDetails(params.slug).then((res) => {
       setData(res);
     });
   }, []);
@@ -54,7 +62,7 @@ const Page = ({ params }: PageProps) => {
               <p className="text-white text-sm">{data?.rating.toUpperCase()}</p>
             </div>
           </div>
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-2 flex-wrap">
             {data?.genres.map((item: any) => (
               <div
                 key={item.name}
@@ -65,10 +73,12 @@ const Page = ({ params }: PageProps) => {
             ))}
           </div>
           <div className="mt-12 flex flex-row gap-4">
-            <Button>
-              <Play className="mr-2 h-4 w-4" />
-              Watch Ep. 1
-            </Button>
+            <Link href={`/anime/${formatTitle(data?.name)}/1`}>
+              <Button>
+                <Play className="mr-2 h-4 w-4" />
+                Watch Ep. 1
+              </Button>
+            </Link>
             <Link
               href={data?.videos[0].player_url ? data.videos[0].player_url : ""}
               target="_blank"
@@ -88,16 +98,22 @@ const Page = ({ params }: PageProps) => {
           <div className="flex space-x-4 pb-4">
             {Array.from({ length: data?.episodes }, (_, index) => index + 1)
               .reverse()
-              .map((value) => (
+              .map((value, index) => (
                 <div className="flex-col gap-2 relative" key={value}>
                   <div className="min-w-[140px]">
-                    <Image
-                      src={`https://shikimori.one${data?.image.original}`}
-                      alt={data?.name}
-                      width={140}
-                      height={200}
-                      className="rounded-md"
-                    />
+                    <Link
+                      href={`/anime/${formatTitle(data?.name)}/${
+                        Number(data?.episodes) - index
+                      }`}
+                    >
+                      <Image
+                        src={`https://shikimori.one${data?.image.original}`}
+                        alt={data?.name}
+                        width={140}
+                        height={200}
+                        className="rounded-md"
+                      />
+                    </Link>
                   </div>
                   <p className=" text-white text-xs mt-2">Episode {value}</p>
                 </div>

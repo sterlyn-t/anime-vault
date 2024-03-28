@@ -14,7 +14,7 @@ interface PageProps {
   };
 }
 
-export function formatTitle(input: string): string {
+function formatTitle(input: string): string {
   if (!input) return "";
   return input
     .replace(/[^a-zA-Z0-9\s]/g, "")

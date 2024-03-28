@@ -1,6 +1,5 @@
 "use client";
-import { fetchAnimeDetails, getMediaIdByTitle } from "@/app/action";
-import { AnimeProp } from "@/components/AnimeCard";
+import { fetchAnimeDetails } from "@/app/action";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -15,7 +14,7 @@ interface PageProps {
   };
 }
 
-function formatTitle(input: string): string {
+export function formatTitle(input: string): string {
   if (!input) return "";
   return input
     .replace(/[^a-zA-Z0-9\s]/g, "")

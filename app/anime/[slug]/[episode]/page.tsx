@@ -5,6 +5,7 @@ import { prevEpisode } from "@/lib/utils";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import EpisodesList from "./EpisodesList";
 
 interface EpisodePageProps {
   params: {
@@ -42,12 +43,16 @@ const Page = async ({ params, searchParams }: EpisodePageProps) => {
         </section>
         <aside className="lg:col-span-1">
           <div className="ml-4 hidden lg:block">
-            <p className="text-white text-bold">Episodes</p>
+            <EpisodesList
+              episodes={Number(data?.episodes)}
+              currentEpisodeIndex={Number(params.episode)}
+              slug={params.slug}
+            />
           </div>
         </aside>
       </div>
       <div className="mt-4">
-        <p className="text-white text-bold text-2xl">
+        <p className="text-white font-bold text-2xl tracking-tight">
           Episode {currentEpisodeIndex} - {reverseFormatTitle(params.slug)}
         </p>
       </div>

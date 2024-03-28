@@ -21,11 +21,16 @@ export const fetchAnimeDetails = async (id: string) => {
   return data;
 };
 
-export async function getMediaIdByTitle(title: string) {
+export async function getMediaDataByTitle(title: string) {
   console.log("hereeeeee");
-  const query = `query($query: String, type:ANIME){
+  const query = `query($query: String){
     Media(search: $query){
       id
+      description
+      coverImage {
+        large
+      }
+      episodes
     }
   }`;
   const res = await fetch("https://graphql.anilist.co", {
@@ -41,8 +46,8 @@ export async function getMediaIdByTitle(title: string) {
       },
     }),
   });
-  if (!res.ok) return null;
+  // if (!res.ok) return null;
   const { data } = await res.json();
   console.log(data);
-  return data?.Media?.id;
+  return data?.Media;
 }

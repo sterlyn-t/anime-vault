@@ -1,7 +1,7 @@
 "use client";
 import AnimeCard, { AnimeProp } from "@/components/AnimeCard";
-import LoadMore from "../components/LoadMore";
-import { fetchAnime } from "./action";
+import LoadMore from "../../components/LoadMore";
+import { fetchAnime } from "../action";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 

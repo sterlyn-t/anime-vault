@@ -51,7 +51,7 @@ const Page = async ({ params, searchParams }: EpisodePageProps) => {
           </div>
         </aside>
       </div>
-      <div className="mt-4">
+      <div>
         <p className="text-white font-bold text-2xl tracking-tight">
           Episode {currentEpisodeIndex} - {reverseFormatTitle(params.slug)}
         </p>

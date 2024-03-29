@@ -29,7 +29,7 @@ const Page = async ({ params }: PageProps) => {
     <div className="p-8 flex flex-col gap-8 lg:container">
       <AspectRatio ratio={16 / 5} className="relative min-h-[125px]">
         <Image
-          src={data?.bannerImage ? data.bannerImage : ""}
+          src={data?.bannerImage ? data.bannerImage : "/placeholder.svg"}
           alt="banner"
           fill
           className="object-cover"

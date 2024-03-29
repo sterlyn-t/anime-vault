@@ -37,6 +37,15 @@ const Page = async ({ params, searchParams }: EpisodePageProps) => {
 
   return (
     <div className="px-8 flex flex-col gap-4 bg-[#0F1117] mb-8">
+      <div className="mt-8 -mb-4">
+        <Link
+          href={`/anime/${params.slug}`}
+          className={buttonVariants({ variant: "secondary" })}
+        >
+          <ArrowLeft height={16} width={16} />
+          <p>Back to series</p>
+        </Link>
+      </div>
       <div className="grid grid-cols-5">
         <section className="col-span-5 lg:col-span-4">
           <VideoPlayerSSR animeTitle={params.slug} episodeId={params.episode} />

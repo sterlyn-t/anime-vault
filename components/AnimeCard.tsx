@@ -53,7 +53,7 @@ function AnimeCard({ anime, index, onClick }: Prop) {
           alt={anime.title}
           fill
           onClick={onClick}
-          className="rounded-lg hover:scale-105 transform transition duration-400 cursor-pointer"
+          className="rounded-lg hover:scale-105 transform transition duration-400 cursor-pointer aspect-auto"
         />
       </div>
       <div className="py-4 flex flex-col gap-3">

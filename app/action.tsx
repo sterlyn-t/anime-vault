@@ -1,6 +1,6 @@
 "use server";
 
-import { data } from "./_data";
+import { search } from "@/lib/consumet";
 
 export const fetchAnime = async (page: number) => {
   const response = await fetch(
@@ -82,8 +82,27 @@ export async function getMediaDataByTitle(title: string) {
       },
     }),
   });
-  // if (!res.ok) return null;
+  if (!res.ok) return null;
   const { data } = await res.json();
-  console.log(data);
   return data?.Media;
+}
+
+export async function getSearchAnimeResult({
+  q,
+  page,
+}: {
+  q: string;
+  page: number;
+}) {
+  const data = await search({ query: q, page });
+  const results = data.results.map(({ title, id, releaseDate, image }) => {
+    const data = {
+      title: title,
+      slug: id,
+      year: releaseDate,
+      image,
+    };
+    return data;
+  });
+  return { ...data, results };
 }

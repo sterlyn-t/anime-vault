@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import SearchComboBox from "./SearchComboBox";
 
 const Navbar = () => {
   return (
@@ -22,6 +23,9 @@ const Navbar = () => {
           <Link href="/home" className="text-zinc-400 hover:text-white">
             Home
           </Link>
+          <div className="absolute right-8">
+            <SearchComboBox />
+          </div>
         </nav>
       </div>
     </header>

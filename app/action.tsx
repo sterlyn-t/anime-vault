@@ -35,6 +35,7 @@ export async function getMediaDataByTitle(title: string) {
       episodes
       genres
       bannerImage
+      averageScore
       relations {
         edges {
           id

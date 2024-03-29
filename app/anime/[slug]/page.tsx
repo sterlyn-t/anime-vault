@@ -86,7 +86,7 @@ const Page = async ({ params }: PageProps) => {
                 .reverse()
                 .map((value, index) => (
                   <>
-                    {index < data?.episodes && (
+                    {value < data?.episodes && (
                       <div className="flex-col gap-2 relative" key={value}>
                         <div className="min-w-[150px]">
                           <Link

@@ -1,5 +1,4 @@
 import AnimeCard, { AnimeProp } from "@/components/AnimeCard";
-import LoadMore from "../../components/LoadMore";
 import { getRecentEpisodes, getTrendingEpisodes } from "@/lib/consumet";
 import Link from "next/link";
 import HorizontalEpisodeList from "./HorizontalEpisodeList";

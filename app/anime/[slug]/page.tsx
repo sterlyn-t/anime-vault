@@ -85,24 +85,32 @@ const Page = async ({ params }: PageProps) => {
               Array.from({ length: data?.episodes }, (_, index) => index + 1)
                 .reverse()
                 .map((value, index) => (
-                  <div className="flex-col gap-2 relative" key={value}>
-                    <div className="min-w-[150px]">
-                      <Link
-                        href={`/anime/${formatTitle(
-                          data?.title.userPreferred
-                        )}/${Number(data?.episodes) - index}`}
-                      >
-                        <Image
-                          src={data?.coverImage.large}
-                          alt={data?.title.english || data?.title.userPreferred}
-                          width={150}
-                          height={200}
-                          className="rounded-md"
-                        />
-                      </Link>
-                    </div>
-                    <p className=" text-white text-xs mt-2">Episode {value}</p>
-                  </div>
+                  <>
+                    {index < data?.episodes && (
+                      <div className="flex-col gap-2 relative" key={value}>
+                        <div className="min-w-[150px]">
+                          <Link
+                            href={`/anime/${formatTitle(
+                              data?.title.userPreferred
+                            )}/${Number(data?.episodes) - index}`}
+                          >
+                            <Image
+                              src={data?.coverImage.large}
+                              alt={
+                                data?.title.english || data?.title.userPreferred
+                              }
+                              width={150}
+                              height={200}
+                              className="rounded-md"
+                            />
+                          </Link>
+                        </div>
+                        <p className=" text-white text-xs mt-2">
+                          Episode {value}
+                        </p>
+                      </div>
+                    )}
+                  </>
                 ))}
           </div>
           <ScrollBar orientation="horizontal" />

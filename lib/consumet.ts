@@ -1,4 +1,3 @@
-import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
 interface WatchProps {
@@ -6,20 +5,40 @@ interface WatchProps {
   animeTitle: string;
 }
 
-// const url = "https://api.consumet.org/anime/gogoanime";
-// const url =
-//   "https://consumet-sterlyn-t.vercel.app/anime/gogoanime/watch/fullmetal-alchemist-brotherhood-episode-1";
-const url = "https://consumet-sterlyn-t.vercel.app/anime/gogoanime/watch";
+const url = "https://consumet-sterlyn-t.vercel.app/anime/gogoanime";
 
 export async function watch({ episodeId, animeTitle }: WatchProps) {
   try {
     const { data } = await axios.get(
-      `${url}/${animeTitle}-episode-${episodeId}`,
+      `${url}/watch/${animeTitle}-episode-${episodeId}`,
       {
         params: { server: "gogocdn" },
       }
     );
     return data;
+  } catch (err) {
+    // throw new Error(err.message);
+  }
+}
+
+export async function getRecentEpisodes() {
+  try {
+    const { data } = await axios.get(`${url}/recent-episodes`, {
+      params: { page: 1, type: 1 },
+    });
+    return data.results;
+  } catch (err) {
+    // throw new Error(err.message);
+  }
+}
+
+export async function getTrendingEpisodes() {
+  try {
+    const { data } = await axios.get(`${url}/top-airing`, {
+      params: { page: 1, type: 1 },
+    });
+
+    return data.results;
   } catch (err) {
     // throw new Error(err.message);
   }

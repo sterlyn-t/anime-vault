@@ -22,15 +22,51 @@ export const fetchAnimeDetails = async (id: string) => {
 };
 
 export async function getMediaDataByTitle(title: string) {
-  console.log("hereeeeee");
   const query = `query($query: String){
     Media(search: $query){
       id
       description
       coverImage {
+        extraLarge
         large
+        medium
+        color
       }
       episodes
+      genres
+      bannerImage
+      relations {
+        edges {
+          id
+          node {
+            coverImage {
+              extraLarge
+              large
+              medium
+              color
+            }
+            startDate {
+              year
+              month
+              day
+            }
+            type
+            siteUrl
+            title {
+              romaji
+              english
+              native
+              userPreferred
+            }
+          }
+        }
+      }
+      title {
+        romaji
+        english
+        native
+        userPreferred
+      }
     }
   }`;
   const res = await fetch("https://graphql.anilist.co", {

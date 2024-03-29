@@ -1,12 +1,12 @@
-"use client";
-import { fetchAnimeDetails } from "@/app/action";
-import React, { useEffect, useState } from "react";
+import { getMediaDataByTitle } from "@/app/action";
+import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface PageProps {
   params: {
@@ -22,101 +22,88 @@ function formatTitle(input: string): string {
     .replace(/\s+/g, "-");
 }
 
-const Page = ({ params }: PageProps) => {
-  const [data, setData] = useState<any>();
-
-  useEffect(() => {
-    fetchAnimeDetails(params.slug).then((res) => {
-      setData(res);
-    });
-  }, []);
+const Page = async ({ params }: PageProps) => {
+  const data = await getMediaDataByTitle(params.slug);
 
   return (
-    <div className="p-8 flex flex-col gap-4">
-      <div className="flex flex-row gap-4">
-        <div className="w-[200px] h-[37vh] relative">
-          <Image
-            src={`https://shikimori.one${data?.image.original}`}
-            alt={data?.name}
-            fill
-            className="rounded-md"
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <h1 className="text-white font-bold text-2xl mt-4">{data?.name}</h1>
-          <div className="flex flex-row gap-4 items-center">
-            <div className="flex flex-row gap-2 items-center">
+    <div className="p-8 flex flex-col gap-8 lg:container">
+      <AspectRatio ratio={16 / 5} className="relative min-h-[125px]">
+        <Image
+          src={data?.bannerImage ? data.bannerImage : ""}
+          alt="banner"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background to-background/10" />
+        <div className="-mb-[48.5px] absolute bottom-0 left-0 ml-8 max-w-2xl">
+          <div className="flex flex-row gap-4">
+            <div className="w-[140px] h-[28vh] relative">
               <Image
-                src="/star.svg"
-                alt="star"
-                width={18}
-                height={18}
-                className="object-contain"
+                src={data?.coverImage.large}
+                alt={data?.title.english || data?.title.userPreferred}
+                fill
+                className="rounded-md"
+                priority
               />
-              <p className="text-base font-bold text-[#FFAD49]">
-                {data?.score}
-              </p>
             </div>
-            <div className="bg-slate-400 py-0.5 px-1.5 rounded-lg">
-              <p className="text-white text-sm">{data?.rating.toUpperCase()}</p>
-            </div>
-          </div>
-          <div className="flex flex-row gap-2 flex-wrap">
-            {data?.genres.map((item: any) => (
-              <div
-                key={item.name}
-                className="rounded-xl border-gray-300 border-2 px-2 py-0.5 bg-slate-600"
-              >
-                <p className="text-sm text-white">{item?.name}</p>
+            <div className="absolute left-40 space-y-2 flex flex-col -mt-[30px] min-w-[600px]">
+              <h1 className="text-black font-bold text-3xl mt-4 mb-2 flex-wrap flex">
+                {data?.title.english || data?.title.userPreferred}
+              </h1>
+              <div className="flex flex-row gap-2 flex-wrap">
+                {data?.genres.map((item: any) => (
+                  <div
+                    key={item}
+                    className="rounded-xl border-gray-900 border-1 px-2 py-0.5 bg-slate-600"
+                  >
+                    <p className="text-sm text-white">{item}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="mt-12 flex flex-row gap-4">
-            <Link href={`/anime/${formatTitle(data?.name)}/1`}>
-              <Button>
-                <Play className="mr-2 h-4 w-4" />
-                Watch Ep. 1
-              </Button>
-            </Link>
-            <Link
-              href={data?.videos[0].player_url ? data.videos[0].player_url : ""}
-              target="_blank"
-            >
-              <Button variant="secondary">
-                <Play className="mr-2 h-4 w-4" />
-                Watch Trailer
-              </Button>
-            </Link>
+              <div className="mt-12 flex flex-row gap-4">
+                <Link
+                  href={`/anime/${formatTitle(data?.title.userPreferred)}/1`}
+                >
+                  <Button>
+                    <Play className="mr-2 h-4 w-4" />
+                    Watch Ep. 1
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <Separator />
+      </AspectRatio>
+
+      <Separator className="bg-zinc-700 mt-8" />
       <h1 className="text-white font-bold text-2xl tracking-tight">Episodes</h1>
       <div className="relative">
         <ScrollArea>
           <div className="flex space-x-4 pb-4">
-            {Array.from({ length: data?.episodes }, (_, index) => index + 1)
-              .reverse()
-              .map((value, index) => (
-                <div className="flex-col gap-2 relative" key={value}>
-                  <div className="min-w-[140px]">
-                    <Link
-                      href={`/anime/${formatTitle(data?.name)}/${
-                        Number(data?.episodes) - index
-                      }`}
-                    >
-                      <Image
-                        src={`https://shikimori.one${data?.image.original}`}
-                        alt={data?.name}
-                        width={140}
-                        height={200}
-                        className="rounded-md"
-                      />
-                    </Link>
+            {data?.episodes &&
+              Array.from({ length: data?.episodes }, (_, index) => index + 1)
+                .reverse()
+                .map((value, index) => (
+                  <div className="flex-col gap-2 relative" key={value}>
+                    <div className="min-w-[150px]">
+                      <Link
+                        href={`/anime/${formatTitle(
+                          data?.title.userPreferred
+                        )}/${Number(data?.episodes) - index}`}
+                      >
+                        <Image
+                          src={data?.coverImage.large}
+                          alt={data?.title.english || data?.title.userPreferred}
+                          width={150}
+                          height={200}
+                          className="rounded-md"
+                        />
+                      </Link>
+                    </div>
+                    <p className=" text-white text-xs mt-2">Episode {value}</p>
                   </div>
-                  <p className=" text-white text-xs mt-2">Episode {value}</p>
-                </div>
-              ))}
+                ))}
           </div>
           <ScrollBar orientation="horizontal" />
         </ScrollArea>

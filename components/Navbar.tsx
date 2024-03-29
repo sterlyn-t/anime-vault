@@ -5,7 +5,7 @@ import Image from "next/image";
 const Navbar = () => {
   return (
     <header className="w-full">
-      <div className="h-20 container items-center py-4 w-full">
+      <div className="h-16 container items-center py-4 w-full">
         <nav className="flex items-center space-x-10">
           <Link href="/">
             <div className="items-center justify-center flex flex-row">

@@ -23,7 +23,7 @@ function formatTitle(input: string): string {
 }
 
 const Page = async ({ params }: PageProps) => {
-  const data = await getMediaDataByTitle(params.slug);
+  const data = await getMediaDataByTitle({ title: params.slug });
 
   return (
     <div className="p-8 flex flex-col gap-8 lg:container">

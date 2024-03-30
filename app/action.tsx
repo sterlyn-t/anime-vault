@@ -21,7 +21,15 @@ export const fetchAnimeDetails = async (id: string) => {
   return data;
 };
 
-export async function getMediaDataByTitle(title: string) {
+export async function getMediaDataByTitle({
+  title,
+  revalidate,
+}: {
+  title: string;
+  revalidate?: number | false;
+}) {
+  const options: NextFetchRequestConfig =
+    typeof revalidate === "number" ? { revalidate } : { revalidate: false };
   const query = `query($query: String){
     Media(search: $query){
       id
@@ -35,7 +43,6 @@ export async function getMediaDataByTitle(title: string) {
       episodes
       genres
       bannerImage
-      averageScore
       relations {
         edges {
           id
@@ -81,6 +88,7 @@ export async function getMediaDataByTitle(title: string) {
       variables: {
         query: title,
       },
+      next: options,
     }),
   });
   if (!res.ok) return null;

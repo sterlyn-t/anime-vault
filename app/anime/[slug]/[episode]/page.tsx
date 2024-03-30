@@ -31,7 +31,7 @@ function reverseFormatTitle(input: string): string {
 
 const Page = async ({ params, searchParams }: EpisodePageProps) => {
   const currentEpisodeIndex = params.episode;
-  const data = await getMediaDataByTitle(params.slug);
+  const data = await getMediaDataByTitle({ title: params.slug });
 
   const prevEp = await prevEpisode(Number(currentEpisodeIndex), data?.episodes);
 

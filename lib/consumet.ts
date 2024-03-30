@@ -1,5 +1,8 @@
+import { getMediaDataByTitle } from "@/app/action";
 import axios from "axios";
+import { info } from "console";
 import { Search } from "lucide-react";
+import { notFound } from "next/navigation";
 
 interface WatchProps {
   episodeId: string;
@@ -69,4 +72,35 @@ export async function search({ query, page = 1 }: SearchProps) {
   if (!response.ok) throw new Error("Failed to fetch search.");
   const data: ConsumetResponse<Search> = await response.json();
   return data;
+}
+
+export async function getAnimeData(id: string) {
+  const response = await fetch(`${url}/anime-details/${id}`, {
+    cache: "no-cache",
+  });
+  // try {
+  //   const { data } = await axios.get(
+  //     `https://api-ani.rohi.dev/api/gogoanime/info/${id}`
+  //   );
+  //   console.log(data);
+  //   return data;
+  // } catch (err) {
+  //   // throw new Error(err.message);
+  // }
+  // console.log(id);
+  // if (!response.ok) throw new Error("Failed to fetch anime info.");
+  const data: any = await response.json();
+  console.log(data);
+  return data;
+}
+
+export async function handleSlug(slug: string) {
+  const [settleSlug] = await Promise.allSettled([getAnimeData(slug)]);
+  const data = settleSlug.status === "fulfilled" ? settleSlug.value : null;
+  if (!data) notFound();
+
+  const anilist = await getMediaDataByTitle({ title: data.title });
+  console.log("hereeeeeeeex2", anilist);
+
+  return { consumet: data, anilist: anilist };
 }

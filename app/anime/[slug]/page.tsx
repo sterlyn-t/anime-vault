@@ -62,9 +62,7 @@ const Page = async ({ params }: PageProps) => {
                 ))}
               </div>
               <div className="mt-12 flex flex-row gap-4">
-                <Link
-                  href={`/anime/${formatTitle(data?.title.userPreferred)}/1`}
-                >
+                <Link href={`/anime/${params.slug}/1`}>
                   <Button>
                     <Play className="mr-2 h-4 w-4" />
                     Watch Ep. 1

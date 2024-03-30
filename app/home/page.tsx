@@ -102,10 +102,10 @@ async function Slide({
         src={data?.bannerImage || "/placeholder.svg"}
         alt={title}
         fill
-        className="absolute inset-0 object-cover"
+        className="absolute inset-0 object-cover rounded-xl"
         priority
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-background to-background/60 md:to-background/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background to-background/60 md:to-background/40 rounded-xl" />
     </AspectRatio>
   );
 }

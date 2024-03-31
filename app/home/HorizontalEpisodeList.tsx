@@ -9,19 +9,26 @@ import React from "react";
 interface HorizontalEpisodeList {
   episodes: any[];
   hideDivider?: boolean;
+  showLatestEpisode?: boolean;
 }
 
-function formatTitle(input: string): string {
+function formatTitle(input: string): string | undefined {
   if (!input) return "";
-  return input
-    .replace(/[^a-zA-Z0-9\s]/g, "")
+  const alphanumericWords = input
     .toLowerCase()
-    .replace(/\s+/g, "-");
+    .match(/[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*/g);
+  const cleanedStr = alphanumericWords?.join("-");
+  // return input
+  //   .replace(/[^a-zA-Z0-9\s-]/g, "")
+  //   .toLowerCase()
+  //   .replace(/\s+/g, "-");
+  return cleanedStr;
 }
 
 const HorizontalEpisodeList = ({
   episodes,
   hideDivider = false,
+  showLatestEpisode = false,
 }: HorizontalEpisodeList) => {
   return (
     <div className="relative">
@@ -29,8 +36,20 @@ const HorizontalEpisodeList = ({
         <div className="flex space-x-4 pb-4">
           {episodes.map((item, index) => (
             <div key={index} className="relative min-w-[220px]">
-              <Link href={`/anime/${formatTitle(item.title)}`}>
-                <AnimeCard anime={item} index={index} />
+              <Link
+                href={
+                  showLatestEpisode
+                    ? `/anime/${formatTitle(item.title)}/${Number(
+                        item.episodeNumber
+                      )}`
+                    : `/anime/${formatTitle(item.title)}`
+                }
+              >
+                <AnimeCard
+                  anime={item}
+                  index={index}
+                  episodeNumber={showLatestEpisode ? item.episodeNumber : ""}
+                />
               </Link>
             </div>
           ))}

@@ -26,6 +26,7 @@ interface Prop {
   anime: Anime;
   index: number;
   onClick?: () => void;
+  episodeNumber?: string;
 }
 
 const variants = {
@@ -33,7 +34,7 @@ const variants = {
   visible: { opacity: 1 },
 };
 
-function AnimeCard({ anime, index, onClick }: Prop) {
+function AnimeCard({ anime, index, onClick, episodeNumber = "" }: Prop) {
   return (
     <MotionDiv
       className="max-w-sm rounded relative w-full"
@@ -56,12 +57,15 @@ function AnimeCard({ anime, index, onClick }: Prop) {
           className="rounded-lg hover:scale-105 transform transition-all object-cover duration-400 cursor-pointer aspect-[3/4]"
         />
       </div>
-      <div className="py-4 flex flex-col gap-3">
+      <div className="py-4 flex flex-col gap-1">
         <div className="flex justify-between items-center gap-1">
           <h2 className="font-semibold text-white text-lg line-clamp-1 w-full flex-wrap flex">
             {anime.title}
           </h2>
         </div>
+        {episodeNumber && (
+          <p className="text-zinc-400 text-xs">Episode {episodeNumber}</p>
+        )}
       </div>
     </MotionDiv>
   );

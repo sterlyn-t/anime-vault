@@ -39,7 +39,7 @@ const Home = async () => {
         <CarouselNext />
       </Carousel>
       <h2 className="text-3xl text-white font-bold">Explore Recent</h2>
-      <HorizontalEpisodeList episodes={recentEpisodes} />
+      <HorizontalEpisodeList episodes={recentEpisodes} showLatestEpisode />
       <h2 className="text-3xl text-white font-bold">Explore Popular</h2>
       <HorizontalEpisodeList episodes={trendingEpisodes} hideDivider />
     </main>

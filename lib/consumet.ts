@@ -75,20 +75,7 @@ export async function search({ query, page = 1 }: SearchProps) {
 }
 
 export async function getAnimeData(id: string) {
-  const response = await fetch(`${url}/anime-details/${id}`, {
-    cache: "no-cache",
-  });
-  // try {
-  //   const { data } = await axios.get(
-  //     `https://api-ani.rohi.dev/api/gogoanime/info/${id}`
-  //   );
-  //   console.log(data);
-  //   return data;
-  // } catch (err) {
-  //   // throw new Error(err.message);
-  // }
-  // console.log(id);
-  // if (!response.ok) throw new Error("Failed to fetch anime info.");
+  const response = await fetch(url);
   const data: any = await response.json();
   console.log(data);
   return data;

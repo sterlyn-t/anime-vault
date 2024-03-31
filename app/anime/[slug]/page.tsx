@@ -15,12 +15,17 @@ interface PageProps {
   };
 }
 
-function formatTitle(input: string): string {
+function formatTitle(input: string): string | undefined {
   if (!input) return "";
-  return input
-    .replace(/[^a-zA-Z0-9\s]/g, "")
+  const alphanumericWords = input
     .toLowerCase()
-    .replace(/\s+/g, "-");
+    .match(/[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*/g);
+  const cleanedStr = alphanumericWords?.join("-");
+  // return input
+  //   .replace(/[^a-zA-Z0-9\s-]/g, "")
+  //   .toLowerCase()
+  //   .replace(/\s+/g, "-");
+  return cleanedStr;
 }
 
 const Page = async ({ params }: PageProps) => {

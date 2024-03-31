@@ -75,7 +75,7 @@ const Page = async ({ params, searchParams }: EpisodePageProps) => {
             Previous
           </Link>
         )}
-        {data.episodes > 1 &&
+        {data?.episodes > 1 &&
           Number(currentEpisodeIndex) + 1 < data.episodes && (
             <Link
               href={`/anime/${params.slug}/${Number(currentEpisodeIndex) + 1}`}

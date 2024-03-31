@@ -90,13 +90,13 @@ const SearchComboBox = () => {
     <>
       <Button
         variant="outline"
-        className="relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-3 xl:py-2 bg-[#0F1117] gap-2 hover:bg-zinc-800"
+        className="relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-3 xl:py-2 bg-[#0F1117] gap-2 hover:bg-zinc-800 border-zinc-500"
         onClick={() => setIsOpen(true)}
       >
-        <Search color="white" height={18} width={18} className="mr-1" />
-        <span className="text-white">
+        <Search height={18} width={18} className="mr-1 text-zinc-400" />
+        <span className="text-zinc-400">
           Type{" "}
-          <kbd className="pointer-events-none h-18 bg-zinc-600 px-1.5 text-[14px] opacity-100 rounded gap-1 border select-none">
+          <kbd className="pointer-events-none h-20 bg-zinc-700 px-1.5 text-[14px] opacity-100 rounded border select-none">
             <span className="text-xs text-white">/</span>
           </kbd>{" "}
           to search anime

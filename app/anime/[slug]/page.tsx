@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Badge } from "@/components/ui/badge";
 
 interface PageProps {
   params: {
@@ -38,30 +39,27 @@ const Page = async ({ params }: PageProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-background to-background/10" />
         <div className="-mb-[48.5px] absolute bottom-0 left-0 ml-8 max-w-2xl">
           <div className="flex flex-row gap-4">
-            <div className="w-[140px] h-[28vh] relative">
-              <Image
-                src={data?.coverImage.large}
-                alt={data?.title.english || data?.title.userPreferred}
-                fill
-                className="rounded-md"
-                priority
-              />
-            </div>
-            <div className="absolute left-40 space-y-2 flex flex-col -mt-[30px] min-w-[600px]">
-              <h1 className="text-black font-bold text-3xl mt-4 mb-2 flex-wrap flex">
+            <Image
+              src={data?.coverImage.large}
+              alt={data?.title.english || data?.title.userPreferred}
+              width={140}
+              height={140}
+              className="rounded-md aspect-[7/8] object-cover"
+              priority
+            />
+
+            <div className="absolute left-40 space-y-2 flex flex-col -mt-[30px]">
+              <h1 className="text-black font-bold text-3xl mt-4 mb-2 flex whitespace-nowrap">
                 {data?.title.english || data?.title.userPreferred}
               </h1>
-              <div className="flex flex-row gap-2 flex-wrap">
-                {data?.genres.map((item: any) => (
-                  <div
-                    key={item}
-                    className="rounded-xl border-gray-900 border-1 px-2 py-0.5 bg-slate-600"
-                  >
-                    <p className="text-sm text-white">{item}</p>
-                  </div>
+              <div className="flex flex-row gap-2">
+                {data?.genres.map((genre: any, index: number) => (
+                  <Badge variant={"secondary"} key={index}>
+                    {genre}
+                  </Badge>
                 ))}
               </div>
-              <div className="mt-12 flex flex-row gap-4">
+              <div className="mt-12">
                 <Link href={`/anime/${params.slug}/1`}>
                   <Button>
                     <Play className="mr-2 h-4 w-4" />

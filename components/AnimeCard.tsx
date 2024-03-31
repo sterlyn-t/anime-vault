@@ -47,13 +47,13 @@ function AnimeCard({ anime, index, onClick }: Prop) {
       }}
       viewport={{ amount: 0 }}
     >
-      <div className="relative w-full h-[50vh]">
+      <div className="relative w-full h-[310px] overflow-hidden rounded-lg">
         <Image
           src={anime.image}
           alt={anime.title}
           fill
           onClick={onClick}
-          className="rounded-lg hover:scale-105 transform transition duration-400 cursor-pointer aspect-auto"
+          className="rounded-lg hover:scale-105 transform transition-all object-cover duration-400 cursor-pointer aspect-[3/4]"
         />
       </div>
       <div className="py-4 flex flex-col gap-3">

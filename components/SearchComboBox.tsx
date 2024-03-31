@@ -94,9 +94,9 @@ const SearchComboBox = () => {
         onClick={() => setIsOpen(true)}
       >
         <Search height={18} width={18} className="mr-1 text-zinc-400" />
-        <span className="text-zinc-400">
+        <span className="text-zinc-400 hidden xl:inline-flex">
           Type{" "}
-          <kbd className="pointer-events-none h-20 bg-zinc-700 px-1.5 text-[14px] opacity-100 rounded border select-none">
+          <kbd className="pointer-events-none h-6 bg-zinc-700 px-1.5 text-[14px] opacity-100 rounded border select-none hidden xl:flex ml-1 mr-1 items-center">
             <span className="text-xs text-white">/</span>
           </kbd>{" "}
           to search anime

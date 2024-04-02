@@ -13,7 +13,7 @@ function Hero() {
             Magic <span className=" text-red-800">Ad-free</span>
           </h1>
         </div>
-        <div className="lg:flex-1 relative w-full h-[50vh] justify-center">
+        <div className="lg:flex-1 relative w-full xl:h-[50vh] h-[42vh] justify-center">
           <Image src="/anime.png" alt="anime" fill className="object-contain" />
         </div>
       </header>

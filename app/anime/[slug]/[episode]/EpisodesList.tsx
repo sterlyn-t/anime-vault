@@ -69,7 +69,7 @@ const EpisodesList: React.FC<EpisodesListProps> = ({
                         )}
                       </div>
                     </Link>
-                    <Separator className="bg-slate-700" />
+                    <Separator className="bg-slate-700" key={index} />
                   </>
                 )}
               </>

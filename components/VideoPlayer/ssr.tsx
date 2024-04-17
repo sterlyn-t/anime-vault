@@ -20,6 +20,7 @@ export default async function VideoPlayerSSR({
     <Suspense fallback={<Skeleton className="h-full w-full" />}>
       <VideoPlayerCSR
         animeTitle={animeTitle}
+        episodeId={episodeId}
         url={
           data.sources.find((s: any) => s.quality === "1440p")?.url ||
           data.sources.find((s: any) => s.quality === "1080p")?.url ||

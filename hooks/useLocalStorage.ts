@@ -36,17 +36,15 @@ export function useLocalStorage() {
 
   const setWatched = ({ id, title, episode, image }: WatchEntryProps) => {
     try {
-      console.log("hereee");
       const watched = localStorage.getItem("watched");
       const watchedArr: WatchedHistory[] = watched ? JSON.parse(watched) : [];
-      console.log("hereeeee");
 
       const existingItemIndex = watchedArr.findIndex((item) => item.id === id);
 
       if (existingItemIndex !== -1) {
         const existingEpisodeIndex = watchedArr[
           existingItemIndex
-        ].episodes.findIndex((episode) => episode.id === episode?.id);
+        ].episodes.findIndex((e) => e.id === episode?.id);
 
         if (existingEpisodeIndex !== -1) {
           const removedEpisode = watchedArr[existingItemIndex].episodes.splice(

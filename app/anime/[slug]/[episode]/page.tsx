@@ -17,7 +17,7 @@ interface EpisodePageProps {
   };
 }
 
-export function reverseFormatTitle(input: string): string {
+function reverseFormatTitle(input: string): string {
   if (!input) return "";
 
   let revertedString = input.replace(/-/g, " ");

@@ -1,6 +1,17 @@
 import Image from "next/image";
 import { MotionDiv } from "./MotionDiv";
-import { reverseFormatTitle } from "@/app/anime/[slug]/[episode]/page";
+
+function reverseFormatTitle(input: string): string {
+  if (!input) return "";
+
+  let revertedString = input.replace(/-/g, " ");
+
+  revertedString = revertedString.replace(/\b\w/g, (match) =>
+    match.toUpperCase()
+  );
+
+  return revertedString;
+}
 
 export interface Anime {
   id: string;

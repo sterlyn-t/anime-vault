@@ -17,7 +17,7 @@ import { getMediaDataByTitle } from "../action";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Play } from "lucide-react";
-import { data } from "../_data";
+import ContinueWatchingEpisodeList from "./ContinueWatchingEpisodeList";
 
 const Home = async () => {
   const recentEpisodes = await getRecentEpisodes();
@@ -42,6 +42,7 @@ const Home = async () => {
       <HorizontalEpisodeList episodes={recentEpisodes} showLatestEpisode />
       <h2 className="text-3xl text-white font-bold">Explore Popular</h2>
       <HorizontalEpisodeList episodes={trendingEpisodes} hideDivider />
+      <ContinueWatchingEpisodeList />
     </main>
   );
 };

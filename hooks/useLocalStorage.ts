@@ -7,29 +7,34 @@ interface Episode {
 interface WatchEntryProps {
   id: string;
   title: string;
+  image: string;
   episode: Episode;
 }
 
 export interface WatchedHistory {
   id: string;
   title: string;
+  image: string;
   episodes: Episode[];
 }
 
 export function useLocalStorage() {
   const getWatched = () => {
     try {
-      const watched = localStorage.getItem("watched");
-      if (watched !== null) {
-        const result = JSON.parse(watched);
-        return result;
+      if (typeof window !== "undefined") {
+        const watched = localStorage.getItem("watched");
+        if (watched !== null) {
+          const result = JSON.parse(watched);
+          return result;
+        }
       }
     } catch (error) {
       console.error("Error getting watched list from localStorage:", error);
     }
+    return null;
   };
 
-  const setWatched = ({ id, title, episode }: WatchEntryProps) => {
+  const setWatched = ({ id, title, episode, image }: WatchEntryProps) => {
     try {
       console.log("hereee");
       const watched = localStorage.getItem("watched");
@@ -56,6 +61,7 @@ export function useLocalStorage() {
         watchedArr.push({
           id,
           title,
+          image,
           episodes: episode ? [episode] : [],
         });
       }

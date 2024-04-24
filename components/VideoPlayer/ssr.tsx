@@ -8,11 +8,13 @@ const VideoPlayerCSR = dynamic(() => import("./csr"), { ssr: false });
 interface VideoPlayerSSRProps {
   animeTitle: string;
   episodeId: string;
+  animeImage: string;
 }
 
 export default async function VideoPlayerSSR({
   animeTitle,
   episodeId,
+  animeImage,
 }: VideoPlayerSSRProps) {
   const data = await watch({ episodeId: episodeId, animeTitle: animeTitle });
 
@@ -21,6 +23,7 @@ export default async function VideoPlayerSSR({
       <VideoPlayerCSR
         animeTitle={animeTitle}
         episodeId={episodeId}
+        animeImage={animeImage}
         url={
           data.sources.find((s: any) => s.quality === "1440p")?.url ||
           data.sources.find((s: any) => s.quality === "1080p")?.url ||

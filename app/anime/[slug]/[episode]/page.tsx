@@ -17,7 +17,7 @@ interface EpisodePageProps {
   };
 }
 
-function reverseFormatTitle(input: string): string {
+export function reverseFormatTitle(input: string): string {
   if (!input) return "";
 
   let revertedString = input.replace(/-/g, " ");
@@ -48,7 +48,11 @@ const Page = async ({ params, searchParams }: EpisodePageProps) => {
       </div>
       <div className="grid grid-cols-5">
         <section className="col-span-5 lg:col-span-4">
-          <VideoPlayerSSR animeTitle={params.slug} episodeId={params.episode} />
+          <VideoPlayerSSR
+            animeTitle={params.slug}
+            episodeId={params.episode}
+            animeImage={data.coverImage.large}
+          />
         </section>
         <aside className="lg:col-span-1">
           <div className="ml-4 hidden lg:block">

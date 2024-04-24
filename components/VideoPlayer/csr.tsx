@@ -6,12 +6,14 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 interface VideoPlayerCSRProps {
   animeTitle: string;
   episodeId: string;
+  animeImage: string;
   url: string;
 }
 
 export default function VideoPlayerCSR({
   url,
   episodeId,
+  animeImage,
   animeTitle,
 }: VideoPlayerCSRProps) {
   const [isPending, startTransition] = useTransition();
@@ -20,6 +22,7 @@ export default function VideoPlayerCSR({
     setWatched({
       id: animeTitle,
       title: animeTitle,
+      image: animeImage,
       episode: { id: episodeId, number: Number(episodeId), url: url },
     });
   };

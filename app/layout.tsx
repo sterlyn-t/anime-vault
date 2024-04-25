@@ -23,8 +23,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${dmSans.className} bg-[#0F1117]`}>
         <main className="max-w-7xl mx-auto bg-[#0F1117]">
-          <Navbar />
           <Toaster />
+          <Navbar />
           {children}
           <Footer />
         </main>

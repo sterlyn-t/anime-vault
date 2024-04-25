@@ -35,7 +35,7 @@ const Page = async ({ params }: PageProps) => {
   const title = anilist?.title.english ?? consumet.title;
 
   return (
-    <div className="p-8 flex flex-col gap-8 lg:container">
+    <main className="p-8 flex flex-col gap-8 lg:container">
       <AspectRatio ratio={16 / 5} className="relative min-h-[125px]">
         <Image
           src={data?.bannerImage ? data.bannerImage : "/placeholder.svg"}
@@ -52,6 +52,7 @@ const Page = async ({ params }: PageProps) => {
               alt={data?.title.english || data?.title.userPreferred}
               width={140}
               height={140}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="rounded-md aspect-[7/8] object-cover"
               priority
             />
@@ -67,7 +68,7 @@ const Page = async ({ params }: PageProps) => {
                   </Badge>
                 ))}
               </div>
-              <div className="mt-12">
+              <div className="mt-12 gap-4 flex flex-row">
                 <Link href={`/anime/${params.slug}/1`}>
                   <Button>
                     <Play className="mr-2 h-4 w-4" />
@@ -121,7 +122,7 @@ const Page = async ({ params }: PageProps) => {
           <ScrollBar orientation="horizontal" />
         </ScrollArea>
       </div>
-    </div>
+    </main>
   );
 };
 

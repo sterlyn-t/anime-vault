@@ -22,8 +22,9 @@ const faqItems: FAQ[] = [
       "Nope, AnimeVault simply connects to servers such as gogoanime to provide epsiode streams.",
   },
   {
-    question: "Is there a way to track watch history?",
-    answer: "Not right now but it is in the works!",
+    question: "Any recommendations?",
+    answer:
+      "Try searching One Piece, Naruto, Attack on Titan or Fullmetal Alchemist.",
   },
 ];
 

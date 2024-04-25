@@ -4,7 +4,9 @@ import ContinueWatchingAnimeCard from "@/components/ContinueWatchingAnimeCard";
 import { ScrollBar } from "@/components/ui/scroll-area";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import { px } from "framer-motion";
 import Link from "next/link";
+import { relative } from "path";
 import React from "react";
 
 interface HorizontalEpisodeList {
@@ -59,7 +61,12 @@ const HorizontalEpisodeList = ({
             ))}
           {continueWatchingList &&
             episodes.map((item, index) => (
-              <div key={index} className="relative max-w-[220px]">
+              <div
+                key={index}
+                className={`relative ${
+                  episodes.length >= 5 ? "min-w-[220px]" : "max-w-[220px]"
+                }`}
+              >
                 <Link
                   href={`/anime/${formatTitle(item.title)}/${Number(
                     Math.max(

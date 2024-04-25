@@ -7,6 +7,7 @@ import Link from "next/link";
 import React from "react";
 import EpisodesList from "./EpisodesList";
 import MarkWatchedButton from "./MarkWatchedButton";
+import { getAnimeData } from "@/lib/consumet";
 
 interface EpisodePageProps {
   params: {
@@ -33,6 +34,7 @@ function reverseFormatTitle(input: string): string {
 const Page = async ({ params, searchParams }: EpisodePageProps) => {
   const currentEpisodeIndex = params.episode;
   const data = await getMediaDataByTitle({ title: params.slug });
+  const animeInfo = await getAnimeData(params.slug);
 
   const prevEp = await prevEpisode(Number(currentEpisodeIndex), data?.episodes);
 
@@ -58,7 +60,9 @@ const Page = async ({ params, searchParams }: EpisodePageProps) => {
         <aside className="lg:col-span-1">
           <div className="ml-4 hidden lg:block">
             <EpisodesList
-              episodes={Number(data?.episodes)}
+              episodes={
+                animeInfo?.episodes?.length ? animeInfo.episodes.length : 0
+              }
               currentEpisodeIndex={Number(params.episode)}
               slug={params.slug}
             />

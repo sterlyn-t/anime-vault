@@ -29,6 +29,7 @@ interface Episode {
 interface Prop {
   anime: Anime;
   index: number;
+  count: number;
   onClick?: () => void;
   highestEpisodeIndex: number;
 }
@@ -41,6 +42,7 @@ const variants = {
 function ContinueWatchingAnimeCard({
   anime,
   index,
+  count,
   onClick,
   highestEpisodeIndex,
 }: Prop) {
@@ -57,7 +59,11 @@ function ContinueWatchingAnimeCard({
       }}
       viewport={{ amount: 0 }}
     >
-      <div className="relative w-full h-[310px] overflow-hidden rounded-lg">
+      <div
+        className={`relative h-[310px] overflow-hidden rounded-lg ${
+          count > 5 ? "w-full" : "w-[220px]"
+        }`}
+      >
         <Image
           src={anime.image}
           alt={anime.title}
@@ -68,7 +74,11 @@ function ContinueWatchingAnimeCard({
       </div>
       <div className="py-4 flex flex-col gap-1">
         <div className="flex justify-between items-center gap-1">
-          <h2 className="font-semibold text-white text-lg line-clamp-1 w-full flex-wrap flex">
+          <h2
+            className={`font-semibold text-white text-lg line-clamp-1 ${
+              count > 5 ? "w-full" : "w-[220px]"
+            } flex-wrap flex`}
+          >
             {reverseFormatTitle(anime.title)}
           </h2>
         </div>

@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { ArrowDown, AudioLines } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef } from "react";
+import WatchedIndicator from "./WatchedIndicator";
 
 interface EpisodesListProps {
   episodes: number;
@@ -54,7 +55,7 @@ const EpisodesList: React.FC<EpisodesListProps> = ({
                       <div className="flex py-4">
                         {index === currentEpisodeIndex ? (
                           <div
-                            className="flex items-center justify-between"
+                            className="flex items-center justify-between w-full"
                             ref={currentEpisodeRef}
                           >
                             <p className=" text-green-700">Episode {index}</p>
@@ -65,7 +66,13 @@ const EpisodesList: React.FC<EpisodesListProps> = ({
                             />
                           </div>
                         ) : (
-                          <p className="text-white">Episode {index}</p>
+                          <div className="flex flex-row items-center w-full justify-between">
+                            <p className="text-white">Episode {index}</p>
+                            <WatchedIndicator
+                              episodeNumber={index}
+                              animeId={slug}
+                            />
+                          </div>
                         )}
                       </div>
                     </Link>

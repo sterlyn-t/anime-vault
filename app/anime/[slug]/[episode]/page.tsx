@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import EpisodesList from "./EpisodesList";
+import MarkWatchedButton from "./MarkWatchedButton";
 
 interface EpisodePageProps {
   params: {
@@ -79,6 +80,11 @@ const Page = async ({ params, searchParams }: EpisodePageProps) => {
             Previous
           </Link>
         )}
+        <MarkWatchedButton
+          animeId={params.slug}
+          image={data.coverImage.large}
+          episodeNumber={Number(currentEpisodeIndex)}
+        />
         {data?.episodes > 1 &&
           Number(currentEpisodeIndex) + 1 < data.episodes && (
             <Link

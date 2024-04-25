@@ -30,7 +30,7 @@ const MarkWatchedButton = ({
   useEffect(() => {
     const anime = watchedData?.find((anime: any) => anime.id === animeId);
     setWatchedState(
-      anime && anime.episodes.find((ep: any) => ep.number === episodeNumber)
+      anime && anime?.episodes?.find((ep: any) => ep.number === episodeNumber)
     );
   }, [watchedData]);
 

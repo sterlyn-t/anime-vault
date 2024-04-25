@@ -22,9 +22,12 @@ const WatchedIndicator = ({
     }
   }, []);
 
-  const anime = watchedData.find((anime: any) => anime.id === animeId);
+  const anime = watchedData?.find((anime: any) => anime.id === animeId);
 
-  if (anime && anime?.episodes.find((ep: any) => ep.number === episodeNumber)) {
+  if (
+    anime &&
+    anime?.episodes?.find((ep: any) => ep.number === episodeNumber)
+  ) {
     return <Check className="h-4 w-4 text-white justify-end" />;
   }
 };

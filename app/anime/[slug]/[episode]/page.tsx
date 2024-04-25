@@ -36,7 +36,10 @@ const Page = async ({ params, searchParams }: EpisodePageProps) => {
   const data = await getMediaDataByTitle({ title: params.slug });
   const animeInfo = await getAnimeData(params.slug);
 
-  const prevEp = await prevEpisode(Number(currentEpisodeIndex), data?.episodes);
+  const prevEp = await prevEpisode(
+    Number(currentEpisodeIndex),
+    animeInfo?.episodes.length
+  );
 
   return (
     <div className="px-8 flex flex-col gap-4 bg-[#0F1117] mb-8">
@@ -89,8 +92,8 @@ const Page = async ({ params, searchParams }: EpisodePageProps) => {
           image={data.coverImage.large}
           episodeNumber={Number(currentEpisodeIndex)}
         />
-        {data?.episodes > 1 &&
-          Number(currentEpisodeIndex) + 1 < data.episodes && (
+        {animeInfo?.episodes?.length > 1 &&
+          Number(currentEpisodeIndex) + 1 < animeInfo?.episodes?.length && (
             <Link
               href={`/anime/${params.slug}/${Number(currentEpisodeIndex) + 1}`}
               className={buttonVariants({ variant: "secondary" })}

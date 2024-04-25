@@ -67,13 +67,15 @@ const HorizontalEpisodeList = ({
                     )
                   )}`}
                 >
-                  <ContinueWatchingAnimeCard
-                    anime={item}
-                    index={index}
-                    highestEpisodeIndex={Math.max(
-                      ...item.episodes.map((episode: any) => episode.number)
-                    )}
-                  />
+                  {item.episodes.length > 0 && (
+                    <ContinueWatchingAnimeCard
+                      anime={item}
+                      index={index}
+                      highestEpisodeIndex={Math.max(
+                        ...item.episodes.map((episode: any) => episode.number)
+                      )}
+                    />
+                  )}
                 </Link>
               </div>
             ))}

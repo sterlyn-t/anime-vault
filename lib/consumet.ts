@@ -1,6 +1,5 @@
 import { getMediaDataByTitle } from "@/app/action";
 import axios from "axios";
-import { info } from "console";
 import { Search } from "lucide-react";
 import { notFound } from "next/navigation";
 
@@ -9,7 +8,9 @@ interface WatchProps {
   animeTitle: string;
 }
 
-const url = "https://consumet-sterlyn-t.vercel.app/anime/gogoanime";
+const url = "https://api-consumet-org-seven-rho.vercel.app/anime/gogoanime";
+
+// const url = "https://consumet-sterlyn-t.vercel.app/anime/gogoanime";
 
 export async function watch({ episodeId, animeTitle }: WatchProps) {
   try {
@@ -75,7 +76,7 @@ export async function search({ query, page = 1 }: SearchProps) {
 }
 
 export async function getAnimeData(id: string) {
-  const response = await fetch(url);
+  const response = await fetch(`${url}/info/${id}`, { cache: "no-cache" });
   const data: any = await response.json();
   console.log(data);
   return data;
@@ -87,7 +88,6 @@ export async function handleSlug(slug: string) {
   if (!data) notFound();
 
   const anilist = await getMediaDataByTitle({ title: data.title });
-  console.log("hereeeeeeeex2", anilist);
 
   return { consumet: data, anilist: anilist };
 }

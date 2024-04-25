@@ -8,6 +8,7 @@ import Link from "next/link";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "@/components/ui/badge";
+import { handleSlug } from "@/lib/consumet";
 
 interface PageProps {
   params: {
@@ -30,6 +31,8 @@ function formatTitle(input: string): string | undefined {
 
 const Page = async ({ params }: PageProps) => {
   const data = await getMediaDataByTitle({ title: params.slug });
+  const { consumet, anilist } = await handleSlug(params.slug);
+  const title = anilist?.title.english ?? consumet.title;
 
   return (
     <div className="p-8 flex flex-col gap-8 lg:container">
@@ -55,7 +58,7 @@ const Page = async ({ params }: PageProps) => {
 
             <div className="absolute left-40 space-y-2 flex flex-col -mt-[30px]">
               <h1 className="text-black font-bold text-3xl mt-4 mb-2 flex whitespace-nowrap">
-                {data?.title.english || data?.title.userPreferred}
+                {title}
               </h1>
               <div className="flex flex-row gap-2">
                 {data?.genres.map((genre: any, index: number) => (
@@ -82,24 +85,25 @@ const Page = async ({ params }: PageProps) => {
       <div className="relative">
         <ScrollArea>
           <div className="flex space-x-4 pb-4">
-            {data?.episodes &&
-              Array.from({ length: data?.episodes }, (_, index) => index + 1)
+            {consumet?.episodes.length > 0 &&
+              Array.from(
+                { length: consumet?.episodes.length },
+                (_, index) => index + 1
+              )
                 .reverse()
                 .map((value, index) => (
                   <>
-                    {value < data?.episodes && (
+                    {value < consumet?.episodes.length && (
                       <div className="flex-col gap-2 relative" key={value}>
                         <div className="min-w-[150px]">
                           <Link
                             href={`/anime/${formatTitle(
                               data?.title.userPreferred
-                            )}/${Number(data?.episodes) - index}`}
+                            )}/${Number(consumet?.episodes.length) - index}`}
                           >
                             <Image
                               src={data?.coverImage.large}
-                              alt={
-                                data?.title.english || data?.title.userPreferred
-                              }
+                              alt={title}
                               width={150}
                               height={200}
                               className="rounded-md"

@@ -48,7 +48,9 @@ function ContinueWatchingAnimeCard({
 }: Prop) {
   return (
     <MotionDiv
-      className="max-w-sm rounded relative w-full"
+      className={`max-w-sm rounded relative ${
+        count >= 5 ? "w-full" : "w-[220px]"
+      }`}
       variants={variants}
       initial="hidden"
       animate="visible"
@@ -61,7 +63,7 @@ function ContinueWatchingAnimeCard({
     >
       <div
         className={`relative h-[310px] overflow-hidden rounded-lg ${
-          count > 5 ? "w-full" : "w-[220px]"
+          count >= 5 ? "w-full" : "w-[220px]"
         }`}
       >
         <Image
@@ -76,7 +78,7 @@ function ContinueWatchingAnimeCard({
         <div className="flex justify-between items-center gap-1">
           <h2
             className={`font-semibold text-white text-lg line-clamp-1 ${
-              count > 5 ? "w-full" : "w-[220px]"
+              count >= 5 ? "w-full" : "w-[220px]"
             } flex-wrap flex`}
           >
             {reverseFormatTitle(anime.title)}

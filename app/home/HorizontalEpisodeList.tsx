@@ -60,7 +60,10 @@ const HorizontalEpisodeList = ({
             episodes.map((item, index) => (
               <>
                 {item.episodes.length > 0 && (
-                  <div key={index} className="relative min-w-[220px]">
+                  <div
+                    key={index}
+                    className="relative min-w-[220px] max-w-[220px]"
+                  >
                     <Link
                       href={`/anime/${formatTitle(item.title)}/${Number(
                         Math.max(
@@ -71,7 +74,7 @@ const HorizontalEpisodeList = ({
                       <ContinueWatchingAnimeCard
                         anime={item}
                         index={index}
-                        count={episodes.length}
+                        count={Number(episodes.length)}
                         highestEpisodeIndex={Math.max(
                           ...item.episodes.map((episode: any) => episode.number)
                         )}

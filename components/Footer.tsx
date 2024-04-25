@@ -19,7 +19,7 @@ function Footer() {
             FAQ
           </p>
         </Link>
-        <Link href={"https://github.com/sterlyn-t/anime-vault"} target="_blank">
+        <Link href={"https://github.com/sterlyn-t"} target="_blank">
           <Github width={19} height={19} color="white" />
         </Link>
       </div>

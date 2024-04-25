@@ -2,10 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import { ArrowRight } from "lucide-react";
+import { Spotlight } from "./ui/spotlight";
 
 function Hero() {
   return (
     <div className="flex flex-col h-[90vh]">
+      <Spotlight />
       <header className="bg-hero bg-center bg-cover bg-no-repeat sm:p-16 xl:py-16 py-12 px-8 flex justify-center lg:items-center max-lg:flex-col w-full sm:gap-16 gap-0">
         <div className="flex-1 flex flex-col gap-10">
           <h1 className="sm:text-6xl text-5xl text-white lg:max-w-lg font-bold leading-[120%]">

@@ -57,6 +57,9 @@ const Page = async ({ params, searchParams }: EpisodePageProps) => {
           <VideoPlayerSSR
             animeTitle={params.slug}
             episodeId={params.episode}
+            episodeCount={
+              animeInfo.episodes.length ? animeInfo.episodes.length : 0
+            }
             animeImage={data.coverImage.large}
           />
         </section>

@@ -9,12 +9,14 @@ interface VideoPlayerSSRProps {
   animeTitle: string;
   episodeId: string;
   animeImage: string;
+  episodeCount: number;
 }
 
 export default async function VideoPlayerSSR({
   animeTitle,
   episodeId,
   animeImage,
+  episodeCount,
 }: VideoPlayerSSRProps) {
   const data = await watch({ episodeId: episodeId, animeTitle: animeTitle });
 
@@ -23,6 +25,7 @@ export default async function VideoPlayerSSR({
       <VideoPlayerCSR
         animeTitle={animeTitle}
         episodeId={episodeId}
+        episodeCount={episodeCount}
         animeImage={animeImage}
         url={
           data.sources.find((s: any) => s.quality === "1440p")?.url ||

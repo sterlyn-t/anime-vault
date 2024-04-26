@@ -58,18 +58,24 @@ export default function VideoPlayerCSR({
   };
 
   return (
-    <div className="relative w-full h-full">
-      <ReactPlayer
-        url={url}
-        width="100%"
-        height="100%"
-        controls={true}
-        loop={false}
-        playIcon={<Play />}
-        onPause={handlePause}
-        onEnded={handleEnded}
-        onBuffer={handlePause}
-      />
+    <div className="relative w-full h-full" style={{ overflow: "hidden" }}>
+      <div style={{ borderRadius: 8, overflow: "hidden" }} className="mt-4">
+        <ReactPlayer
+          url={url}
+          width="100%"
+          height="100%"
+          controls={true}
+          style={{
+            borderRadius: 8,
+            overflow: "hidden",
+          }}
+          loop={false}
+          playIcon={<Play />}
+          onPause={handlePause}
+          onEnded={handleEnded}
+          onBuffer={handlePause}
+        />
+      </div>
     </div>
   );
 }

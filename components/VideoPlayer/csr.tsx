@@ -1,9 +1,9 @@
 "use client";
 import ReactPlayer from "react-player";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { Play } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useState } from "react";
 
 interface VideoPlayerCSRProps {
   animeTitle: string;
@@ -20,6 +20,7 @@ export default function VideoPlayerCSR({
   animeTitle,
   episodeCount,
 }: VideoPlayerCSRProps) {
+  const [playing, setPlaying] = useState<boolean>(false);
   const { setWatched } = useLocalStorage();
   const router = useRouter();
   const handlePause = () => {
@@ -62,6 +63,10 @@ export default function VideoPlayerCSR({
       <div style={{ borderRadius: 8, overflow: "hidden" }} className="mt-4">
         <ReactPlayer
           url={url}
+          playing={playing}
+          onReady={() => {
+            setPlaying(true);
+          }}
           width="100%"
           height="100%"
           controls={true}
@@ -70,7 +75,6 @@ export default function VideoPlayerCSR({
             overflow: "hidden",
           }}
           loop={false}
-          playIcon={<Play />}
           onPause={handlePause}
           onEnded={handleEnded}
           onBuffer={handlePause}

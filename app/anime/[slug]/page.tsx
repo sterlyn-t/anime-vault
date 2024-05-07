@@ -63,7 +63,11 @@ const Page = async ({ params }: PageProps) => {
               </h1>
               <div className="flex flex-row gap-2">
                 {data?.genres.map((genre: any, index: number) => (
-                  <Badge variant={"secondary"} key={index}>
+                  <Badge
+                    variant={"secondary"}
+                    key={index}
+                    className="flex-shrink-0"
+                  >
                     {genre}
                   </Badge>
                 ))}
@@ -82,7 +86,7 @@ const Page = async ({ params }: PageProps) => {
       </AspectRatio>
 
       <div
-        className="text-xs md:text-sm text-zinc-400 mt-8"
+        className="text-xs md:text-sm text-zinc-400 mt-10"
         dangerouslySetInnerHTML={{ __html: data?.description }}
       />
       <Separator className="bg-zinc-700" />

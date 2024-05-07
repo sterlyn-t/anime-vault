@@ -81,7 +81,11 @@ const Page = async ({ params }: PageProps) => {
         </div>
       </AspectRatio>
 
-      <Separator className="bg-zinc-700 mt-8" />
+      <div
+        className="text-xs md:text-sm text-zinc-400 mt-8"
+        dangerouslySetInnerHTML={{ __html: data?.description }}
+      />
+      <Separator className="bg-zinc-700" />
       <h1 className="text-white font-bold text-2xl tracking-tight">Episodes</h1>
       <div className="relative">
         <ScrollArea>

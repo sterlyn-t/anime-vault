@@ -2,13 +2,14 @@ import { getMediaDataByTitle } from "@/app/action";
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { CirclePlus, Play, Plus } from "lucide-react";
+import { Play, Plus } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "@/components/ui/badge";
 import { handleSlug } from "@/lib/consumet";
+import WatchLaterButton from "./WatchLaterButton";
 
 interface PageProps {
   params: {
@@ -79,9 +80,7 @@ const Page = async ({ params }: PageProps) => {
                     Watch Ep. 1
                   </Button>
                 </Link>
-                <div className="rounded-2xl items-center border-zinc-500 border-2 hover:border-zinc-700 cursor-pointer bg-zinc-300 hover:bg-zinc- hover:opacity-90">
-                  <Plus className="h-6 w-6 text-zinc-600 hover:text-zinc-800" />
-                </div>
+                <WatchLaterButton />
               </div>
             </div>
           </div>

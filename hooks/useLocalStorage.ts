@@ -1,3 +1,6 @@
+import image from "next/image";
+import { title } from "process";
+
 interface Episode {
   id: string;
   number?: number;
@@ -18,9 +21,10 @@ export interface WatchedHistory {
   episodes: Episode[];
 }
 
-interface MarkWatchedButtonProps {
-  episodeNumber: number;
-  animeId: string;
+interface WatchLaterEntryProp {
+  id: string;
+  title: string;
+  image: string;
 }
 
 export function useLocalStorage() {
@@ -108,5 +112,25 @@ export function useLocalStorage() {
     }
   };
 
-  return { getWatched, setWatched, removeWatchedEpisode };
+  const setMyList = ({ id, title, image }: WatchLaterEntryProp) => {
+    try {
+      const myList = localStorage.getItem("myList");
+      const myListArr: WatchLaterEntryProp[] = myList ? JSON.parse(myList) : [];
+
+      const existingItemIndex = myListArr.findIndex((item) => item.id === id);
+
+      if (existingItemIndex === -1) {
+        myListArr.push({
+          id,
+          title,
+          image,
+        });
+      }
+      localStorage.setItem("myList", JSON.stringify(myListArr));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return { getWatched, setWatched, removeWatchedEpisode, setMyList };
 }

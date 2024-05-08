@@ -2,7 +2,7 @@ import { getMediaDataByTitle } from "@/app/action";
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Play } from "lucide-react";
+import { CirclePlus, Play, Plus } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -72,13 +72,16 @@ const Page = async ({ params }: PageProps) => {
                   </Badge>
                 ))}
               </div>
-              <div className="mt-12 gap-4 flex flex-row">
+              <div className="mt-12 gap-4 flex flex-row items-center">
                 <Link href={`/anime/${params.slug}/1`}>
                   <Button>
                     <Play className="mr-2 h-4 w-4" />
                     Watch Ep. 1
                   </Button>
                 </Link>
+                <div className="rounded-2xl items-center border-zinc-500 border-2 hover:border-zinc-700 cursor-pointer bg-zinc-300 hover:bg-zinc- hover:opacity-90">
+                  <Plus className="h-6 w-6 text-zinc-600 hover:text-zinc-800" />
+                </div>
               </div>
             </div>
           </div>

@@ -29,9 +29,9 @@ interface Episode {
 interface Prop {
   anime: Anime;
   index: number;
-  count: number;
+  count?: number;
   onClick?: () => void;
-  highestEpisodeIndex: number;
+  highestEpisodeIndex?: number;
 }
 
 const variants = {
@@ -49,7 +49,7 @@ function ContinueWatchingAnimeCard({
   return (
     <MotionDiv
       className={`max-w-sm rounded relative ${
-        count >= 5 ? "w-full" : "w-[220px]"
+        count && count >= 5 ? "w-full" : "w-[220px]"
       }`}
       variants={variants}
       initial="hidden"
@@ -63,7 +63,7 @@ function ContinueWatchingAnimeCard({
     >
       <div
         className={`relative h-[310px] overflow-hidden rounded-lg ${
-          count >= 5 ? "w-full" : "w-[220px]"
+          count && count >= 5 ? "w-full" : "w-[220px]"
         }`}
       >
         <Image
@@ -78,13 +78,15 @@ function ContinueWatchingAnimeCard({
         <div className="flex justify-between items-center gap-1">
           <h2
             className={`font-semibold text-white text-lg line-clamp-1 ${
-              count >= 5 ? "w-full" : "w-[220px]"
+              count && count >= 5 ? "w-full" : "w-[220px]"
             } flex-wrap flex`}
           >
             {reverseFormatTitle(anime.title)}
           </h2>
         </div>
-        <p className="text-zinc-400 text-xs">Episode {highestEpisodeIndex}</p>
+        {highestEpisodeIndex && (
+          <p className="text-zinc-400 text-xs">Episode {highestEpisodeIndex}</p>
+        )}
       </div>
     </MotionDiv>
   );

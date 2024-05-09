@@ -11,6 +11,7 @@ interface HorizontalEpisodeList {
   hideDivider?: boolean;
   showLatestEpisode?: boolean;
   continueWatchingList?: boolean;
+  myList?: boolean;
 }
 
 function formatTitle(input: string): string | undefined {
@@ -31,12 +32,14 @@ const HorizontalEpisodeList = ({
   hideDivider = false,
   showLatestEpisode = false,
   continueWatchingList = false,
+  myList = false,
 }: HorizontalEpisodeList) => {
   return (
     <div className="relative">
       <ScrollArea>
         <div className="flex space-x-4 pb-4">
           {!continueWatchingList &&
+            !myList &&
             episodes.map((item, index) => (
               <div key={index} className="relative min-w-[220px]">
                 <Link
@@ -83,6 +86,24 @@ const HorizontalEpisodeList = ({
                     </Link>
                   </div>
                 )}
+              </>
+            ))}
+          {myList &&
+            episodes &&
+            episodes.map((item, index) => (
+              <>
+                <div
+                  className="relative min-w-[220px] max-w-[220px]"
+                  key={index}
+                >
+                  <Link href={`/anime/${formatTitle(item.title)}`}>
+                    <ContinueWatchingAnimeCard
+                      anime={item}
+                      key={index}
+                      index={index}
+                    />
+                  </Link>
+                </div>
               </>
             ))}
           <ScrollBar orientation="horizontal" />

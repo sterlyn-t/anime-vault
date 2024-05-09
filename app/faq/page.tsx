@@ -31,7 +31,7 @@ const faqItems: FAQ[] = [
 const Page = () => {
   return (
     <div className="min-h-[80vh] py-8 xl:px-24 px-8 flex flex-col gap-8 items-center">
-      <h1 className="text-white font-bold text-2xl">
+      <h1 className="text-white font-bold text-3xl">
         Frequently Asked Questions
       </h1>
       <Accordion type="single" collapsible className="w-full">

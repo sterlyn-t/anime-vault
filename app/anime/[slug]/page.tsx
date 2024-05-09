@@ -80,7 +80,10 @@ const Page = async ({ params }: PageProps) => {
                     Watch Ep. 1
                   </Button>
                 </Link>
-                <WatchLaterButton />
+                <WatchLaterButton
+                  animeId={params.slug}
+                  image={data?.coverImage?.large}
+                />
               </div>
             </div>
           </div>

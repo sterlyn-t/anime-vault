@@ -112,6 +112,21 @@ export function useLocalStorage() {
     }
   };
 
+  const getMyList = () => {
+    try {
+      if (typeof window !== "undefined") {
+        const watched = localStorage.getItem("myList");
+        if (watched !== null) {
+          const result = JSON.parse(watched);
+          return result;
+        }
+      }
+    } catch (error) {
+      console.error("Error getting my list from localStorage:", error);
+    }
+    return null;
+  };
+
   const setMyList = ({ id, title, image }: WatchLaterEntryProp) => {
     try {
       const myList = localStorage.getItem("myList");
@@ -132,5 +147,32 @@ export function useLocalStorage() {
     }
   };
 
-  return { getWatched, setWatched, removeWatchedEpisode, setMyList };
+  const removeMyListEpisode = (animeId: string) => {
+    try {
+      const watched = localStorage.getItem("myList");
+      const watchedArr: WatchLaterEntryProp[] = watched
+        ? JSON.parse(watched)
+        : [];
+
+      const animeIndex = watchedArr.findIndex((item) => item.id === animeId);
+
+      if (animeIndex !== -1) {
+        watchedArr.splice(animeIndex, 1);
+        localStorage.setItem("myList", JSON.stringify(watchedArr));
+      } else {
+        console.log(`Anime with ID ${animeId} not found in my list.`);
+      }
+    } catch (error) {
+      console.error("Error removing episode from watched history:", error);
+    }
+  };
+
+  return {
+    getWatched,
+    setWatched,
+    removeWatchedEpisode,
+    getMyList,
+    setMyList,
+    removeMyListEpisode,
+  };
 }

@@ -19,7 +19,10 @@ const WatchLaterButton = ({ animeId, image }: WatchLaterButtonProps) => {
     if (typeof window !== "undefined") {
       const episodesFromLocalStorage = getMyList();
       setMyListData(episodesFromLocalStorage);
-      if (episodesFromLocalStorage.find((value: any) => value.id === animeId)) {
+      if (
+        episodesFromLocalStorage &&
+        episodesFromLocalStorage.find((value: any) => value.id === animeId)
+      ) {
         setClicked(true);
       }
       setTimeout(() => {

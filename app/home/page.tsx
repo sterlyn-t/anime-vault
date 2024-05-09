@@ -18,6 +18,7 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Play } from "lucide-react";
 import ContinueWatchingEpisodeList from "./ContinueWatchingEpisodeList";
+import MyListEpisodeList from "./MyListsEpisodeList";
 
 const Home = async () => {
   const recentEpisodes = await getRecentEpisodes();
@@ -43,6 +44,7 @@ const Home = async () => {
       <h2 className="text-3xl text-white font-bold">Explore Popular</h2>
       <HorizontalEpisodeList episodes={trendingEpisodes} hideDivider />
       <ContinueWatchingEpisodeList />
+      <MyListEpisodeList />
     </main>
   );
 };
